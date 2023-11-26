@@ -31,6 +31,7 @@ model Home {
   land_size                     Float
   propertyType                  propertyType 
   updated_at                    DateTime @updatedAt
+  images                        Image[]
 
 }
 
@@ -39,6 +40,8 @@ model Image {
   url                           String
   updated_at                    DateTime @updatedAt
   created_at                    DateTime @default(now())
+  home_id                       Int
+  home                          Home @relation(fields:[home_id],references: [id])
 }
 model Message {
   id                            Int @id @default(autoincrement())
