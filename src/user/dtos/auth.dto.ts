@@ -1,11 +1,14 @@
 /* eslint-disable prettier/prettier */
+import { UserType } from '@prisma/client';
 import {
   IsString,
   IsNotEmpty,
   IsEmail,
   MinLength,
   Matches,
+  IsEnum
 } from 'class-validator';
+
 export class SignupDto {
   @IsString()
   @IsNotEmpty()
@@ -27,4 +30,11 @@ export class SignInDto {
 
   @IsString()
   password: string;
+}
+export class GenerateProductKeyDto {
+  @IsEmail()
+  email: string;
+
+  @IsEnum(UserType, { message: 'Invalid user type' })
+  userType: UserType;
 }

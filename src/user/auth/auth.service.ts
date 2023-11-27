@@ -67,4 +67,9 @@ export class AuthService {
       expiresIn: 24 * 60 * 60,
     });
   }
+
+  generateProductKey(email: string, userType: UserType) {
+    const string = `${email}-${userType}-${process.env.PRODUCT_KEY_SECRET}`;
+    return bcrypt.hash(string, 10);
+  }
 }
