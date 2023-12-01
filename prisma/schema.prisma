@@ -33,7 +33,7 @@ model Home {
   listed_date                   DateTime @default(now())
   price                         Float 
   land_size                     Float
-  propertyType                  propertyType 
+  propertyType                  PropertyType 
   created_at                    DateTime @default(now())
   updated_at                    DateTime @updatedAt
   images                        Image[]
@@ -63,7 +63,7 @@ model Message {
   buyer                         User @relation("realtor_messages",fields:[buyer_id],references: [id])
 }
 
-enum propertyType {
+enum PropertyType {
   RESIDENTIAL
   CONDO
 }

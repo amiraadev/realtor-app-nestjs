@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { propertyType } from '@prisma/client';
+import { PropertyType } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
 
 export class HomeResponseDto {
@@ -38,7 +38,7 @@ export class HomeResponseDto {
     return this.land_size;
   }
 
-  propertyType: propertyType;
+  propertyType: PropertyType;
   @Exclude()
   created_at: Date;
   @Exclude()
