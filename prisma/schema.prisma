@@ -31,8 +31,10 @@ model Home {
   number_of_bathrooms           Float
   city                          String 
   listed_date                   DateTime @default(now())
+  price                         Float 
   land_size                     Float
   propertyType                  propertyType 
+  created_at                    DateTime @default(now())
   updated_at                    DateTime @updatedAt
   images                        Image[]
   realtor_id                    Int
