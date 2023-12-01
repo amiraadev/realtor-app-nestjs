@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { HomeResponseDto } from './dto/home.dto';
+import { CreateHomeDto, HomeResponseDto } from './dto/home.dto';
 import { PropertyType } from '@prisma/client';
 
 interface GetHomesParams {
@@ -14,6 +14,7 @@ interface GetHomesParams {
 @Injectable()
 export class HomeService {
   constructor(private readonly prismaService: PrismaService) {}
+
   async getHomes(filter: GetHomesParams): Promise<HomeResponseDto[]> {
     const home = await this.prismaService.home.findMany({
       select: {
@@ -39,8 +40,34 @@ export class HomeService {
     return home.map((home) => {
       const fetchHome = { ...home, image: home.images[0].url };
       delete fetchHome.images;
-      //   console.log(new HomeResponseDto(fetchHome));
       return new HomeResponseDto(fetchHome);
+    });
+  }
+  async getHome(id: number): Promise<HomeResponseDto> {
+    const home = await this.prismaService.home.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!home) {
+      throw new NotFoundException('No home found matching this id.');
+    }
+
+    return new HomeResponseDto(home);
+  }
+
+  async createHome(body: CreateHomeDto): Promise<HomeResponseDto> {
+    const home = await this.prismaService.home.create({
+      data: {
+        address: body.address,
+        city: body.city,
+        price: body.price,
+        propertyType: body.propertyType,
+        numberOfBedrooms: body.numberOfBedrooms,
+        numberOfBathrooms: body.numberOfBathrooms,
+        landSize: body.landSize,
+        images: body.images,
+      },
     });
   }
 }
