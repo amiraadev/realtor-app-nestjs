@@ -16,6 +16,7 @@ import { CreateHomeDto, HomeResponseDto, UpdateHomeDto } from './dto/home.dto';
 import { PropertyType, UserType } from '@prisma/client';
 import { User, UserAuthorized } from 'src/user/decorators/user.decorators';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { Roles } from 'src/user/decorators/roles.decorator';
 
 @Controller('home')
 export class HomeController {
@@ -51,11 +52,12 @@ export class HomeController {
     return this.homeService.getHome(id);
   }
 
-  // @Roles(UserType.REALTOR, UserType.ADMIN)
+  @Roles(UserType.REALTOR, UserType.ADMIN)
   @UseGuards(AuthGuard)
   @Post()
   createHome(@Body() body: CreateHomeDto, @User() user: UserAuthorized) {
-    return this.homeService.createHome(body, user.id);
+    // return this.homeService.createHome(body, user.id);
+    return 'helloe';
   }
 
   // @Roles(UserType.REALTOR, UserType.ADMIN)
