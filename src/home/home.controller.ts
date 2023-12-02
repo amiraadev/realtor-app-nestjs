@@ -52,15 +52,15 @@ export class HomeController {
     return this.homeService.getHome(id);
   }
 
-  @Roles(UserType.REALTOR, UserType.ADMIN)
+  @Roles(UserType.REALTOR)
   @UseGuards(AuthGuard)
   @Post()
   createHome(@Body() body: CreateHomeDto, @User() user: UserAuthorized) {
-    // return this.homeService.createHome(body, user.id);
-    return 'hello';
+    return this.homeService.createHome(body, user.id);
   }
 
-  // @Roles(UserType.REALTOR, UserType.ADMIN)
+  @Roles(UserType.REALTOR)
+  @UseGuards(AuthGuard)
   @Put(':id')
   async updateHome(
     @Param('id', ParseIntPipe) id: number,
@@ -72,10 +72,10 @@ export class HomeController {
       throw new UnauthorizedException();
     }
     return this.homeService.updateHomeById(id, body);
-    // return body;
   }
 
-  // @Roles(UserType.REALTOR, UserType.ADMIN)
+  @Roles(UserType.REALTOR)
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async deleteHome(@Param('id', ParseIntPipe) id: number, @User() user) {
     const realtor = await this.homeService.getRealtorByHomeId(id);

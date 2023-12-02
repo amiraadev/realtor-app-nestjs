@@ -23,51 +23,46 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
+# REALTOR App - House Data Management
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This Nest.js project is a backend service designed to manage house data for sale, serving as an infrastructure similar to the REALTOR app. It leverages various technologies and features to handle data securely and efficiently.
 
-## Installation
+## Features
 
-```bash
-$ npm install
-```
+### Technologies Used
 
-## Running the app
+- **PostgreSQL Database**: Houses the application's data using Prisma as the ORM to interact with the database.
+- **Prisma**: Provides a type-safe database access layer and schema management.
+- **Interceptors**: Utilized to modify and handle incoming requests and outgoing responses.
+- **Class Validator**: Validates and ensures the correctness of incoming data structures.
+- **Class Transformer**: Used for transforming incoming data into specific DTOs (Data Transfer Objects).
+- **Guards**: Implements guards to control access to routes based on certain conditions.
+- **Authorization & Authentication**: Utilizes JWT (JSON Web Tokens) for secure user authentication and authorization.
 
-```bash
-# development
-$ npm run start
+## Usage
 
-# watch mode
-$ npm run start:dev
+### Prerequisites
 
-# production mode
-$ npm run start:prod
-```
+- Node.js and npm installed
+- PostgreSQL database setup and configured
+- Set environment variables for database connection and JWT secret
 
-## Test
+### Installation
 
-```bash
-# unit tests
-$ npm run test
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Set up the environment variables (e.g., database connection, JWT secret) in the `.env` file.
+4. Run `npm run start:dev` to start the development server.
 
-# e2e tests
-$ npm run test:e2e
+### Endpoints
 
-# test coverage
-$ npm run test:cov
-```
+- `/home`: Manages house data, including creation, retrieval, updating, and deletion.
+- `/auth`: Handles user authentication and authorization.
 
-## Support
+## Contributing
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Contributions and feedback are welcome! Please feel free to submit issues or pull requests for improvements or bug fixes.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
