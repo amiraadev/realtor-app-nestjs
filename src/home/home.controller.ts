@@ -9,11 +9,13 @@ import {
   ParseIntPipe,
   Body,
   UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
 import { HomeService } from './home.service';
 import { CreateHomeDto, HomeResponseDto, UpdateHomeDto } from './dto/home.dto';
 import { PropertyType, UserType } from '@prisma/client';
 import { User, UserAuthorized } from 'src/user/decorators/user.decorators';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('home')
 export class HomeController {
@@ -50,6 +52,7 @@ export class HomeController {
   }
 
   // @Roles(UserType.REALTOR, UserType.ADMIN)
+  @UseGuards(AuthGuard)
   @Post()
   createHome(@Body() body: CreateHomeDto, @User() user: UserAuthorized) {
     return this.homeService.createHome(body, user.id);
