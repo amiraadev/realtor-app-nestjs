@@ -130,6 +130,10 @@ export class UpdateHomeDto {
     @IsPositive()
     @IsOptional()
     landSize?: number;
+}
 
-  
+export class InquireDto {
+  @IsString()
+  @IsNotEmpty()
+  message:string ;
 }
