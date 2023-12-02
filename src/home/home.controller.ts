@@ -12,7 +12,7 @@ import {
 import { HomeService } from './home.service';
 import { CreateHomeDto, HomeResponseDto, UpdateHomeDto } from './dto/home.dto';
 import { PropertyType } from '@prisma/client';
-import { User } from 'src/user/decorators/user.decorators';
+import { User, UserAuthorized } from 'src/user/decorators/user.decorators';
 
 @Controller('home')
 export class HomeController {
@@ -20,6 +20,7 @@ export class HomeController {
 
   @Get()
   getHomes(
+    @User() user,
     @Query('city') city?: string,
     @Query('minPrice') minPrice?: string,
     @Query('maxPrice') maxPrice?: string,
@@ -40,6 +41,7 @@ export class HomeController {
     // console.log(filters);
 
     return this.homeService.getHomes(filters);
+    // return user;
   }
 
   @Get(':id')
@@ -48,9 +50,8 @@ export class HomeController {
   }
 
   @Post()
-  createHome(@Body() body: CreateHomeDto, @User() user) {
-    return this.homeService.createHome(body);
-    // return body;
+  createHome(@Body() body: CreateHomeDto, @User() user: UserAuthorized) {
+    return this.homeService.createHome(body, user.id);
   }
 
   @Put(':id')
