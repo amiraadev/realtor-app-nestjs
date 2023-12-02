@@ -57,7 +57,7 @@ export class HomeController {
   @Post()
   createHome(@Body() body: CreateHomeDto, @User() user: UserAuthorized) {
     // return this.homeService.createHome(body, user.id);
-    return 'helloe';
+    return 'hello';
   }
 
   // @Roles(UserType.REALTOR, UserType.ADMIN)
