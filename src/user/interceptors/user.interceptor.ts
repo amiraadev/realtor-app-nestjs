@@ -7,7 +7,7 @@ export class UserInterceptor implements NestInterceptor {
     const token = request?.headers?.authorization?.split('Bearer ')[1];
     const user = await jwt.decode(token) 
     request.user = user
-    console.log(user);
+    // console.log(user);
     
     return handler.handle();
   }
