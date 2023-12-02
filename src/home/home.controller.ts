@@ -87,13 +87,26 @@ export class HomeController {
     this.homeService.deleteHomeById(id);
   }
 
-  @Roles(UserType.REALTOR)
-  @Post('inquire/:id')
+  @Roles(UserType.BUYER)
+  @Post('/:id/inquire/')
   inquire(
     @Param('id', ParseIntPipe) homeId: number,
     @User() user: UserAuthorized,
     @Body() { message }: InquireDto,
   ) {
     return this.homeService.inquire(user, homeId, message);
+  }
+
+  @Roles(UserType.REALTOR)
+  @Get('/:id/messages/')
+  async getHomeMessages(
+    @Param('id', ParseIntPipe) homeId: number,
+    @User() user: UserAuthorized,
+  ) {
+    const realtor = await this.homeService.getRealtorByHomeId(homeId);
+    if (realtor.id !== user.id) {
+      throw new UnauthorizedException();
+    }
+    return this.homeService.getMesssagesByHome(homeId);
   }
 }
